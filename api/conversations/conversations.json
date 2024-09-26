@@ -9,7 +9,7 @@
     },
     {
       "topic": "Health",
-      "imageUrl": "health.jpg",
+      "imageUrl": "https://blog.ipleaders.in/wp-content/uploads/2020/01/Health-Insurance.jpg",
       "dialogues": [
         { "user": "What is a balanced diet?", "partner": "A balanced diet includes a variety of foods that provide nutrients needed for good health." },
         { "user": "How can I reduce stress?", "partner": "Regular exercise, meditation, and adequate sleep can help reduce stress levels." }
@@ -17,7 +17,7 @@
     },
     {
       "topic": "Travel",
-      "imageUrl": "travel.jpg",
+      "imageUrl": "https://www.marklockyer.com/wp-content/uploads/2024/05/travel.png",
       "dialogues": [
         { "user": "What are some popular travel destinations?", "partner": "Places like Paris, Bali, and Tokyo are popular for their unique attractions and culture." },
         { "user": "How can I travel on a budget?", "partner": "Consider traveling during off-peak seasons and staying in budget accommodations." }
