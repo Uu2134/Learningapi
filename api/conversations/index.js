@@ -1,39 +1,17 @@
 const express = require('express');
-const router = express.Router();
-const fs = require('fs');
-const path = require('path');
+const app = express();
+const port = process.env.PORT || 3000;
+const conversationsRouter = require('./conversations');
 
-// Load conversations from JSON file
-const conversationsFile = path.join(__dirname, 'conversations.json');
-let conversations = [];
+app.use(express.json());
+app.use('/api/conversations', conversationsRouter);
+app.use('/images', express.static(path.join(__dirname, '..', 'public/images')));
 
-fs.readFile(conversationsFile, 'utf8', (err, data) => {
-  if (err) {
-    console.error('Error reading conversations file:', err);
-    return;
-  }
-  conversations = JSON.parse(data);
+// Default route for API
+app.get('/', (req, res) => {
+  res.send('Welcome to the Learning API!');
 });
 
-// Get all topics
-router.get('/topics', (req, res) => {
-  const topics = conversations.map(conversation => ({
-    topic: conversation.topic,
-    image: `/images/${conversation.image}`,
-  }));
-  res.json(topics);
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
 });
-
-// Get conversations by topic
-router.get('/:topic', (req, res) => {
-  const topic = req.params.topic;
-  const conversation = conversations.find(c => c.topic.toLowerCase() === topic.toLowerCase());
-
-  if (conversation) {
-    res.json(conversation);
-  } else {
-    res.status(404).json({ message: 'Topic not found' });
-  }
-});
-
-module.exports = router;

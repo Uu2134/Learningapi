@@ -1,27 +1,47 @@
-[
-    {
-      "topic": "Education",
-      "image": "education.jpg",
-      "dialogues": [
-        { "user": "What is the importance of education?", "partner": "Education helps individuals develop critical thinking skills and gain knowledge." },
-        { "user": "How does education affect society?", "partner": "It promotes equality and empowers people to make informed decisions." }
-      ]
-    },
-    {
-      "topic": "Health",
-      "image": "health.jpg",
-      "dialogues": [
-        { "user": "What is a balanced diet?", "partner": "A balanced diet includes a variety of foods that provide nutrients needed for good health." },
-        { "user": "How can I reduce stress?", "partner": "Regular exercise, meditation, and adequate sleep can help reduce stress levels." }
-      ]
-    },
-    {
-      "topic": "Travel",
-      "image": "travel.jpg",
-      "dialogues": [
-        { "user": "What are some popular travel destinations?", "partner": "Places like Paris, Bali, and Tokyo are popular for their unique attractions and culture." },
-        { "user": "How can I travel on a budget?", "partner": "Consider traveling during off-peak seasons and staying in budget accommodations." }
-      ]
-    }
-  ]
-  
+const express = require('express');
+const router = express.Router();
+const fs = require('fs');
+const path = require('path');
+
+// Load conversations from JSON file
+const conversationsFile = path.join(__dirname, 'conversations.json');
+let conversations = [];
+
+fs.readFile(conversationsFile, 'utf8', (err, data) => {
+  if (err) {
+    console.error('Error reading conversations file:', err);
+    return;
+  }
+  try {
+    conversations = JSON.parse(data);
+  } catch (parseError) {
+    console.error('Error parsing conversations file:', parseError);
+  }
+});
+
+// Get all topics
+router.get('/topics', (req, res) => {
+  if (conversations.length === 0) {
+    return res.status(500).json({ message: 'No topics available.' });
+  }
+
+  const topics = conversations.map(conversation => ({
+    topic: conversation.topic,
+    image: `/images/${conversation.image}`,
+  }));
+  res.json(topics);
+});
+
+// Get conversations by topic
+router.get('/:topic', (req, res) => {
+  const topic = req.params.topic.toLowerCase();
+  const conversation = conversations.find(c => c.topic.toLowerCase() === topic);
+
+  if (conversation) {
+    res.json(conversation);
+  } else {
+    res.status(404).json({ message: 'Topic not found' });
+  }
+});
+
+module.exports = router;
