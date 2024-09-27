@@ -5,36 +5,51 @@ const path = require('path');
 
 // Load conversations from JSON file
 const conversationsFile = path.join(__dirname, 'conversations.json');
-let conversations = [];
 
-// Read the JSON file when the server starts
-fs.readFile(conversationsFile, 'utf8', (err, data) => {
-  if (err) {
-    console.error('Error reading conversations file:', err);
-    return;
-  }
-  conversations = JSON.parse(data);
-});
+// Async function to read the file
+const getConversations = async () => {
+  return new Promise((resolve, reject) => {
+    fs.readFile(conversationsFile, 'utf8', (err, data) => {
+      if (err) {
+        console.error('Error reading conversations file:', err);
+        reject('Error reading conversations file');
+      }
+      resolve(JSON.parse(data));
+    });
+  });
+};
 
 // Get all topics with full conversation data
-router.get('/topics', (req, res) => {
-  const topics = conversations.map(conversation => ({
-    topic: conversation.topic,
-    imageUrl: conversation.imageUrl,
-    dialogues: conversation.dialogues
-  }));
-  res.json(topics);
+router.get('/topics', async (req, res) => {
+  try {
+    const conversations = await getConversations();
+    const topics = conversations.map(conversation => ({
+      topic: conversation.topic,
+      imageUrl: conversation.imageUrl,
+      dialogues: conversation.dialogues
+    }));
+    res.json(topics);
+  } catch (error) {
+    console.error('Error retrieving topics:', error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
 });
 
 // Get conversations by specific topic
-router.get('/:topic', (req, res) => {
-  const topic = req.params.topic;
-  const conversation = conversations.find(c => c.topic.toLowerCase() === topic.toLowerCase());
+router.get('/:topic', async (req, res) => {
+  try {
+    const conversations = await getConversations();
+    const topic = req.params.topic;
+    const conversation = conversations.find(c => c.topic.toLowerCase() === topic.toLowerCase());
 
-  if (conversation) {
-    res.json(conversation);
-  } else {
-    res.status(404).json({ message: 'Topic not found' });
+    if (conversation) {
+      res.json(conversation);
+    } else {
+      res.status(404).json({ message: 'Topic not found' });
+    }
+  } catch (error) {
+    console.error('Error retrieving conversation:', error);
+    res.status(500).json({ message: 'Internal Server Error' });
   }
 });
 
