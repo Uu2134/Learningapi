@@ -7,6 +7,7 @@ const path = require('path');
 const conversationsFile = path.join(__dirname, 'conversations.json');
 let conversations = [];
 
+// Read the JSON file when the server starts
 fs.readFile(conversationsFile, 'utf8', (err, data) => {
   if (err) {
     console.error('Error reading conversations file:', err);
@@ -15,16 +16,17 @@ fs.readFile(conversationsFile, 'utf8', (err, data) => {
   conversations = JSON.parse(data);
 });
 
-// Get all topics
+// Get all topics with full conversation data
 router.get('/topics', (req, res) => {
   const topics = conversations.map(conversation => ({
     topic: conversation.topic,
-    image: `/images/${conversation.image}`,
+    imageUrl: conversation.imageUrl,
+    dialogues: conversation.dialogues
   }));
   res.json(topics);
 });
 
-// Get conversations by topic
+// Get conversations by specific topic
 router.get('/:topic', (req, res) => {
   const topic = req.params.topic;
   const conversation = conversations.find(c => c.topic.toLowerCase() === topic.toLowerCase());

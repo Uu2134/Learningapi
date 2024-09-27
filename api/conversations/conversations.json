@@ -1,27 +1,26 @@
 [
-    {
-      "topic": "Education",
-      "imageUrl": "https://habitatbroward.org/wp-content/uploads/2020/01/10-Benefits-Showing-Why-Education-Is-Important-to-Our-Society.jpg",
-      "dialogues": [
-        { "user": "What is the importance of education?", "partner": "Education helps individuals develop critical thinking skills and gain knowledge." },
-        { "user": "How does education affect society?", "partner": "It promotes equality and empowers people to make informed decisions." }
-      ]
-    },
-    {
-      "topic": "Health",
-      "imageUrl": "https://blog.ipleaders.in/wp-content/uploads/2020/01/Health-Insurance.jpg",
-      "dialogues": [
-        { "user": "What is a balanced diet?", "partner": "A balanced diet includes a variety of foods that provide nutrients needed for good health." },
-        { "user": "How can I reduce stress?", "partner": "Regular exercise, meditation, and adequate sleep can help reduce stress levels." }
-      ]
-    },
-    {
-      "topic": "Travel",
-      "imageUrl": "https://www.marklockyer.com/wp-content/uploads/2024/05/travel.png",
-      "dialogues": [
-        { "user": "What are some popular travel destinations?", "partner": "Places like Paris, Bali, and Tokyo are popular for their unique attractions and culture." },
-        { "user": "How can I travel on a budget?", "partner": "Consider traveling during off-peak seasons and staying in budget accommodations." }
-      ]
-    }
-  ]
-  
+  {
+    "topic": "Education",
+    "imageUrl": "https://habitatbroward.org/wp-content/uploads/2020/01/10-Benefits-Showing-Why-Education-Is-Important-to-Our-Society.jpg",
+    "dialogues": [
+      { "user": "What is the importance of education?", "partner": "Education helps individuals develop critical thinking skills and gain knowledge." },
+      { "user": "How does education affect society?", "partner": "It promotes equality and empowers people to make informed decisions." }
+    ]
+  },
+  {
+    "topic": "Health",
+    "imageUrl": "https://blog.ipleaders.in/wp-content/uploads/2020/01/Health-Insurance.jpg",
+    "dialogues": [
+      { "user": "What is a balanced diet?", "partner": "A balanced diet includes a variety of foods that provide nutrients needed for good health." },
+      { "user": "How can I reduce stress?", "partner": "Regular exercise, meditation, and adequate sleep can help reduce stress levels." }
+    ]
+  },
+  {
+    "topic": "Travel",
+    "imageUrl": "https://www.marklockyer.com/wp-content/uploads/2024/05/travel.png",
+    "dialogues": [
+      { "user": "What are some popular travel destinations?", "partner": "Places like Paris, Bali, and Tokyo are popular for their unique attractions and culture." },
+      { "user": "How can I travel on a budget?", "partner": "Consider traveling during off-peak seasons and staying in budget accommodations." }
+    ]
+  }
+]
