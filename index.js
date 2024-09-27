@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const port = process.env.PORT || 3000;
-const conversationsRouter = require('./api/conversations');
+const conversationsRouter = require('./api/conversations/conversations');
 
 // Middleware to parse JSON requests
 app.use(express.json());

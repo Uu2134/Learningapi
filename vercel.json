@@ -13,7 +13,7 @@
   "routes": [
     {
       "src": "/api/conversations/(.*)",
-      "dest": "/api/index.js"
+      "dest": "/api/conversations.js"
     },
     {
       "src": "/(.*)",
